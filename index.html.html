@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guyana growth plan: timeline and owners</title>
+<style>
+:root{
+  --forest:#0F3B2E; --forest-2:#164C3B; --gold:#F2C230; --ink:#17221D; --muted:#5B6B64;
+  --line:#DCE4DF; --paper:#FFFFFF; --wash:#F4F7F5;
+  --pA:#1F7A4D; --pB:#0E7C86; --pC:#B07D05; --pD:#C9571B; --pE:#B3122E; --pF:#3E4C8C;
+  --serif: Cambria, "Iowan Old Style", Georgia, serif;
+  --sans: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{margin:0;background:var(--wash);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.45}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1240px;margin-inline:auto;padding:0 clamp(16px,3vw,32px)}
+
+/* header */
+.hero{background:var(--forest);color:#fff;position:relative;overflow:hidden}
+.hero .wrap{padding-top:36px;padding-bottom:28px;position:relative;z-index:1}
+.hero svg.arrow{position:absolute;right:-40px;top:0;height:100%;width:auto;opacity:.95;z-index:0}
+.hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(28px,4vw,44px);line-height:1.1;margin:0 0 10px;max-width:16em}
+.hero p{margin:0;max-width:44em;color:#CFE0D6;font-size:16px}
+.hero p b{color:var(--gold);font-weight:600}
+.figs{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:26px}
+.fig .n{font-family:var(--serif);font-size:38px;line-height:1;color:var(--gold);font-variant-numeric:tabular-nums}
+.fig .l{font-size:13px;color:#CFE0D6;margin-top:4px}
+
+/* filters */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-top:10px;padding-bottom:10px}
+.chip{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.chip:hover{border-color:var(--muted)}
+.chip .dot{width:9px;height:9px;border-radius:50%}
+.chip[aria-pressed=true]{background:var(--forest);color:#fff;border-color:var(--forest)}
+.bar select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 10px;font-size:13px;max-width:100%}
+.bar .grow{flex:1}
+.bar .reset{background:none;border:none;color:var(--pB);font-size:13px;cursor:pointer;text-decoration:underline;padding:4px}
+.status{width:100%;font-size:12px;color:var(--muted)}
+
+main.wrap{padding-top:24px;padding-bottom:40px;display:flex;flex-direction:column;gap:20px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px;position:relative;min-width:0}
+.panel h2{font-family:var(--serif);font-size:21px;margin:0}
+.panel .note{color:var(--muted);font-size:13px;margin:4px 0 16px}
+.two{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+
+/* charts */
+svg text{font-family:var(--sans)}
+.row{cursor:pointer}
+.row:hover .hl{fill:var(--wash)}
+.tip{position:absolute;display:none;pointer-events:none;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(15,59,46,.16);padding:8px 10px;font-size:12.5px;max-width:300px;z-index:30}
+.tip .a{color:var(--muted)} .tip .b{font-weight:600;margin:2px 0 4px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted);margin-top:12px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+
+/* focus */
+.focus .id{font-family:var(--serif);font-size:48px;line-height:1;font-weight:700}
+.focus .ph{font-size:13px;color:var(--muted);margin-top:6px}
+.focus .pur{font-family:var(--serif);font-size:22px;line-height:1.25;margin:14px 0 18px}
+.focus dl{margin:0;display:grid;grid-template-columns:6.5em 1fr;gap:10px 14px}
+.focus dt{color:var(--muted);font-size:13px;padding-top:2px}
+.focus dd{margin:0}
+.focus .owners{display:flex;flex-wrap:wrap;gap:6px}
+.nav{display:flex;gap:8px;margin-top:20px}
+.nav button{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer}
+.nav button:disabled{opacity:.4;cursor:default}
+
+/* table */
+.thead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:10px}
+.thead input{border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:13px;min-width:min(100%,260px)}
+.tbox{max-height:560px;overflow:auto;border-top:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{position:sticky;top:0;background:var(--paper);text-align:left;font-weight:600;color:var(--muted);padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+th button{all:unset;cursor:pointer}
+th button:focus-visible{outline:2px solid var(--gold)}
+td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr{cursor:pointer}
+tbody tr:hover td{background:var(--wash)}
+tbody tr.sel td{background:#FFF6D6}
+td.s{font-weight:700;white-space:nowrap}
+@media (max-width:700px){.hn{display:none}.hero svg.arrow{display:none}.bar{position:static}.chip .full{display:none}}
+footer{color:var(--muted);font-size:12px;padding-bottom:30px}
+.empty{color:var(--muted);font-size:14px;padding:24px 0;text-align:center}
+@media (prefers-reduced-motion:no-preference){
+  .bar-anim{animation:grow .6s cubic-bezier(.2,.8,.2,1) both;transform-box:fill-box;transform-origin:left center}
+  @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+}
+@media print{.bar{position:static}.tbox{max-height:none;overflow:visible}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <svg class="arrow" viewBox="0 0 300 300" preserveAspectRatio="xMaxYMid meet" aria-hidden="true">
+    <polygon points="0,0 300,150 0,300" fill="#FFFFFF" opacity=".10"/>
+    <polygon points="0,18 262,150 0,282" fill="#F2C230" opacity=".22"/>
+    <polygon points="0,70 150,150 0,230" fill="#CE1126" opacity=".30"/>
+  </svg>
+  <div class="wrap">
+    <h1>Guyana growth plan: timeline and owners</h1>
+    <p id="take"></p>
+    <div class="figs" id="figs"></div>
+  </div>
+</header>
+
+<nav class="bar" aria-label="Filters">
+  <div class="wrap">
+    <span id="phaseChips" style="display:contents"></span>
+    <span class="grow"></span>
+    <label for="roleSel" class="hn" style="font-size:13px;color:var(--muted)">Position</label>
+    <select id="roleSel"></select>
+    <button class="reset" id="reset" type="button">Clear filters</button>
+    <div class="status" id="status" aria-live="polite"></div>
+  </div>
+</nav>
+
+<main class="wrap">
+  <section class="panel" id="tlPanel">
+    <h2>Timeline</h2>
+    <p class="note">Bars show each step's day window from the mandate. Steps tied to a trigger or cadence show it in italics. Hover for owners, click to focus.</p>
+    <div id="gantt"></div>
+    <div class="legend" id="legend"></div>
+    <div class="tip" id="tip1"></div>
+  </section>
+
+  <div class="two">
+    <section class="panel" id="ownPanel">
+      <h2>Steps led by each position</h2>
+      <p class="note">Each block is one step, coloured by phase. Click a position to filter the page.</p>
+      <div id="owners"></div>
+      <div class="tip" id="tip2"></div>
+    </section>
+    <section class="panel focus" id="focus" aria-live="polite"></section>
+  </div>
+
+  <section class="panel">
+    <div class="thead">
+      <h2>Step register</h2>
+      <input type="search" id="search" placeholder="Search purpose, position or timing" aria-label="Search steps">
+    </div>
+    <p class="note">Click a column name to sort; click a row to focus that step.</p>
+    <div class="tbox">
+      <table>
+        <thead><tr>
+          <th><button data-k="seq">Step</button></th>
+          <th class="hn"><button data-k="phase">Phase</button></th>
+          <th><button data-k="purpose">Business purpose</button></th>
+          <th><button data-k="positions">Positions</button></th>
+          <th><button data-k="timing">Timing</button></th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </section>
+  <footer>Source: Guyana growth plan step table. Leads exclude roles marked as consulted or supporting. Days are counted from the mandate.</footer>
+</main>
+
+<script>
+const STEPS = [{"step": "0", "seq": 1, "phase": "A", "phase_name": "Mandate & evidence foundation", "purpose": "Confirm budgets and market size", "positions": "Vivek; Data & Insights supports", "timing": "Before mandate; annual refresh", "start_day": null, "end_day": null, "cadence": "Annual"}, {"step": "1", "seq": 2, "phase": "A", "phase_name": "Mandate & evidence foundation", "purpose": "Confirm Guyana mandate", "positions": "Vivek", "timing": "Days 1–3; quarterly", "start_day": 1, "end_day": 3, "cadence": "Quarterly"}, {"step": "2", "seq": 3, "phase": "A", "phase_name": "Mandate & evidence foundation", "purpose": "Establish evidence baseline", "positions": "Data Collection Engineer; Data & Insights", "timing": "Days 1–10; quarterly", "start_day": 1, "end_day": 10, "cadence": "Quarterly"}, {"step": "2A", "seq": 4, "phase": "A", "phase_name": "Mandate & evidence foundation", "purpose": "Confirm data need, sources and five-year capital deployment", "positions": "Data Collection Engineer; Data & Insights", "timing": "Days 3–12; quarterly", "start_day": 3, "end_day": 12, "cadence": "Quarterly"}, {"step": "3", "seq": 5, "phase": "B", "phase_name": "Market strategy & readiness", "purpose": "Select growth cells", "positions": "Data & Insights; Marketing and Sales consulted", "timing": "Days 10–15; monthly", "start_day": 10, "end_day": 15, "cadence": "Monthly"}, {"step": "3A", "seq": 6, "phase": "B", "phase_name": "Market strategy & readiness", "purpose": "Assess geopolitical and macro-risk stability", "positions": "Data & Insights; Sales and Market Liaison consulted; Vivek approves", "timing": "At entry; quarterly and event-driven", "start_day": null, "end_day": null, "cadence": "Quarterly"}, {"step": "3B", "seq": 7, "phase": "B", "phase_name": "Market strategy & readiness", "purpose": "Build manpower and capacity plan", "positions": "Functional Leads; Data & Insights consolidates", "timing": "Days 10–20; monthly", "start_day": 10, "end_day": 20, "cadence": "Monthly"}, {"step": "3C", "seq": 8, "phase": "B", "phase_name": "Market strategy & readiness", "purpose": "Establish buddy programme and communication", "positions": "Growth & Revenue Council; Functional Leads", "timing": "Before activation; weekly", "start_day": null, "end_day": null, "cadence": "Weekly"}, {"step": "3D", "seq": 9, "phase": "C", "phase_name": "Brand, contacts & offers", "purpose": "Build brand position and voice", "positions": "Marketing Lead", "timing": "Days 15–25; quarterly", "start_day": 15, "end_day": 25, "cadence": "Quarterly"}, {"step": "3E", "seq": 10, "phase": "C", "phase_name": "Brand, contacts & offers", "purpose": "Design outreach programme", "positions": "Outreach Lead", "timing": "Days 20–30; monthly", "start_day": 20, "end_day": 30, "cadence": "Monthly"}, {"step": "3F", "seq": 11, "phase": "B", "phase_name": "Market strategy & readiness", "purpose": "Build competitor, partner and substitute profile", "positions": "Market Intelligence; Sales and Technical consulted", "timing": "Days 10–25; quarterly", "start_day": 10, "end_day": 25, "cadence": "Quarterly"}, {"step": "3G", "seq": 12, "phase": "C", "phase_name": "Brand, contacts & offers", "purpose": "Build buyer and contact universe", "positions": "Data Collection Engineer; Data & Insights validates", "timing": "Days 15–30; biweekly", "start_day": 15, "end_day": 30, "cadence": "Fortnightly"}, {"step": "4", "seq": 13, "phase": "C", "phase_name": "Brand, contacts & offers", "purpose": "Build Guyana Voice Sheet", "positions": "Marketing Lead; Sales, Outreach, Technical consulted", "timing": "Days 20–30; quarterly", "start_day": 20, "end_day": 30, "cadence": "Quarterly"}, {"step": "5", "seq": 14, "phase": "C", "phase_name": "Brand, contacts & offers", "purpose": "Audit proof", "positions": "Proposal Lead; Delivery and Marketing support", "timing": "Days 20–35; monthly", "start_day": 20, "end_day": 35, "cadence": "Monthly"}, {"step": "6", "seq": 15, "phase": "C", "phase_name": "Brand, contacts & offers", "purpose": "Package offers", "positions": "Sales Lead; Technical and Proposals support", "timing": "Days 25–40; quarterly", "start_day": 25, "end_day": 40, "cadence": "Quarterly"}, {"step": "7", "seq": 16, "phase": "D", "phase_name": "Market activation", "purpose": "Design campaigns", "positions": "Marketing; Outreach and Data support", "timing": "Days 35–50; per campaign", "start_day": 35, "end_day": 50, "cadence": "Per campaign"}, {"step": "7A", "seq": 17, "phase": "D", "phase_name": "Market activation", "purpose": "Create brand awareness (Lunch & learns)", "positions": "Sales and Marketing Team", "timing": "Days 45–90; continuous", "start_day": 45, "end_day": 90, "cadence": "Continuous"}, {"step": "7B", "seq": 18, "phase": "D", "phase_name": "Market activation", "purpose": "Design and roll out educator programs", "positions": "Strategy Team", "timing": "Weekly", "start_day": null, "end_day": null, "cadence": "Weekly"}, {"step": "8", "seq": 19, "phase": "D", "phase_name": "Market activation", "purpose": "Activate visibility", "positions": "Marketing Lead", "timing": "Days 45–90; continuous", "start_day": 45, "end_day": 90, "cadence": "Continuous"}, {"step": "9", "seq": 20, "phase": "D", "phase_name": "Market activation", "purpose": "Score engagement", "positions": "Marketing and Outreach; Data validates", "timing": "Weekly", "start_day": null, "end_day": null, "cadence": "Weekly"}, {"step": "10", "seq": 21, "phase": "E", "phase_name": "Pursuit & conversion gates", "purpose": "Validate access", "positions": "Outreach Lead", "timing": "Within 1 business day for high intent", "start_day": null, "end_day": null, "cadence": "Event SLA"}, {"step": "11", "seq": 22, "phase": "E", "phase_name": "Pursuit & conversion gates", "purpose": "Qualify commercially", "positions": "Sales Lead / Account Executive", "timing": "Within 5 business days of handoff", "start_day": null, "end_day": null, "cadence": "Event SLA"}, {"step": "12", "seq": 23, "phase": "E", "phase_name": "Pursuit & conversion gates", "purpose": "Confirm technical readiness", "positions": "Technical Lead", "timing": "Before bid gate", "start_day": null, "end_day": null, "cadence": "Gate"}, {"step": "13", "seq": 24, "phase": "E", "phase_name": "Pursuit & conversion gates", "purpose": "Bid/no-bid and proposal", "positions": "Sales Lead + Proposal Lead + Technical Lead", "timing": "Per pursuit gate", "start_day": null, "end_day": null, "cadence": "Gate"}, {"step": "14", "seq": 25, "phase": "F", "phase_name": "Deliver, learn & recalibrate", "purpose": "Deliver and capture proof", "positions": "Delivery Lead; Sales, Marketing, Proposals support", "timing": "Project lifecycle", "start_day": null, "end_day": null, "cadence": "Project lifecycle"}, {"step": "14A", "seq": 26, "phase": "F", "phase_name": "Deliver, learn & recalibrate", "purpose": "Build project portfolio and sequence", "positions": "Growth Council; Sales, Technical, Proposals, Data", "timing": "Monthly", "start_day": null, "end_day": null, "cadence": "Monthly"}, {"step": "15", "seq": 27, "phase": "F", "phase_name": "Deliver, learn & recalibrate", "purpose": "Analyze performance", "positions": "Data & Insights; Data Collection Engineer", "timing": "Fortnightly pilot; monthly", "start_day": null, "end_day": null, "cadence": "Monthly"}, {"step": "15A", "seq": 28, "phase": "F", "phase_name": "Deliver, learn & recalibrate", "purpose": "Institute lessons learned", "positions": "Data & Insights; all Functional Leads", "timing": "At close", "start_day": null, "end_day": null, "cadence": "At close"}, {"step": "16", "seq": 29, "phase": "F", "phase_name": "Deliver, learn & recalibrate", "purpose": "Decide and recalibrate", "positions": "Executive Sponsor / Pricing Authority; evidence by Data & Insights", "timing": "Monthly; quarterly review", "start_day": null, "end_day": null, "cadence": "Monthly"}];
+const OWNERS = [{"role": "Vivek", "group": "Leadership & insight", "step": "0", "phase": "A"}, {"role": "Vivek", "group": "Leadership & insight", "step": "1", "phase": "A"}, {"role": "Vivek", "group": "Leadership & insight", "step": "3A", "phase": "B"}, {"role": "Executive Sponsor / Pricing Authority", "group": "Leadership & insight", "step": "16", "phase": "F"}, {"role": "Growth & Revenue Council", "group": "Leadership & insight", "step": "3C", "phase": "B"}, {"role": "Growth & Revenue Council", "group": "Leadership & insight", "step": "14A", "phase": "F"}, {"role": "Data & Insights", "group": "Leadership & insight", "step": "2", "phase": "A"}, {"role": "Data & Insights", "group": "Leadership & insight", "step": "2A", "phase": "A"}, {"role": "Data & Insights", "group": "Leadership & insight", "step": "3", "phase": "B"}, {"role": "Data & Insights", "group": "Leadership & insight", "step": "3A", "phase": "B"}, {"role": "Data & Insights", "group": "Leadership & insight", "step": "15", "phase": "F"}, {"role": "Data & Insights", "group": "Leadership & insight", "step": "15A", "phase": "F"}, {"role": "Data Collection Engineer", "group": "Leadership & insight", "step": "2", "phase": "A"}, {"role": "Data Collection Engineer", "group": "Leadership & insight", "step": "2A", "phase": "A"}, {"role": "Data Collection Engineer", "group": "Leadership & insight", "step": "3G", "phase": "C"}, {"role": "Data Collection Engineer", "group": "Leadership & insight", "step": "15", "phase": "F"}, {"role": "Functional Leads", "group": "Leadership & insight", "step": "3B", "phase": "B"}, {"role": "Functional Leads", "group": "Leadership & insight", "step": "3C", "phase": "B"}, {"role": "Functional Leads", "group": "Leadership & insight", "step": "15A", "phase": "F"}, {"role": "Market Intelligence", "group": "Leadership & insight", "step": "3F", "phase": "B"}, {"role": "Marketing Lead", "group": "Go-to-market & delivery", "step": "3D", "phase": "C"}, {"role": "Marketing Lead", "group": "Go-to-market & delivery", "step": "4", "phase": "C"}, {"role": "Marketing Lead", "group": "Go-to-market & delivery", "step": "7", "phase": "D"}, {"role": "Marketing Lead", "group": "Go-to-market & delivery", "step": "8", "phase": "D"}, {"role": "Marketing Lead", "group": "Go-to-market & delivery", "step": "9", "phase": "D"}, {"role": "Outreach Lead", "group": "Go-to-market & delivery", "step": "3E", "phase": "C"}, {"role": "Outreach Lead", "group": "Go-to-market & delivery", "step": "9", "phase": "D"}, {"role": "Outreach Lead", "group": "Go-to-market & delivery", "step": "10", "phase": "E"}, {"role": "Sales Lead / Account Executive", "group": "Go-to-market & delivery", "step": "6", "phase": "C"}, {"role": "Sales Lead / Account Executive", "group": "Go-to-market & delivery", "step": "11", "phase": "E"}, {"role": "Sales Lead / Account Executive", "group": "Go-to-market & delivery", "step": "13", "phase": "E"}, {"role": "Sales & Marketing Team", "group": "Go-to-market & delivery", "step": "7A", "phase": "D"}, {"role": "Strategy Team", "group": "Go-to-market & delivery", "step": "7B", "phase": "D"}, {"role": "Proposal Lead", "group": "Go-to-market & delivery", "step": "5", "phase": "C"}, {"role": "Proposal Lead", "group": "Go-to-market & delivery", "step": "13", "phase": "E"}, {"role": "Technical Lead", "group": "Go-to-market & delivery", "step": "12", "phase": "E"}, {"role": "Technical Lead", "group": "Go-to-market & delivery", "step": "13", "phase": "E"}, {"role": "Delivery Lead", "group": "Go-to-market & delivery", "step": "14", "phase": "F"}];
+const PH = ["A","B","C","D","E","F"];
+const PCOL = {A:"#1F7A4D",B:"#0E7C86",C:"#B07D05",D:"#C9571B",E:"#B3122E",F:"#3E4C8C"};
+const PNAME = {}; STEPS.forEach(s => PNAME[s.phase] = s.phase_name);
+const state = { phase:"all", role:"all", sel:null, sortK:"seq", sortDir:1, q:"" };
+const $ = s => document.querySelector(s);
+const NS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs={}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+const timed = s => s.start_day !== null && s.start_day !== undefined;
+let animate = !matchMedia("(prefers-reduced-motion: reduce)").matches, firstDraw = true;
+
+// ---------- header ----------
+(function(){
+  const t = STEPS.filter(timed);
+  const fEnd = Math.max(...t.filter(s => "ABC".includes(s.phase)).map(s => s.end_day));
+  const aStart = Math.min(...t.filter(s => s.phase === "D").map(s => s.start_day));
+  const last = Math.max(...t.map(s => s.end_day));
+  const load = {}; OWNERS.forEach(o => load[o.role] = (load[o.role]||0) + 1);
+  const top = Object.entries(load).sort((a,b) => b[1]-a[1])[0];
+  const take = $("#take");
+  const add = (txt, bold) => { const n = document.createElement(bold ? "b" : "span"); n.textContent = txt; take.appendChild(n); };
+  add("Foundation work finishes by "); add("Day " + fEnd, 1); add(", activation runs from "); add("Day " + aStart, 1);
+  add(" to "); add("Day " + last, 1); add(", and "); add(top[0], 1); add(" leads the most steps (" + top[1] + "), so its capacity sets the pace.");
+  const figs = [[STEPS.length,"steps in the plan"],[new Set(STEPS.map(s=>s.phase)).size,"phases"],[Object.keys(load).length,"accountable positions"],["Day " + last,"last planned day"]];
+  figs.forEach(([n,l]) => { const d = document.createElement("div"); d.className="fig"; d.innerHTML = '<div class="n"></div><div class="l"></div>'; d.children[0].textContent = n; d.children[1].textContent = l; $("#figs").appendChild(d); });
+  // legend
+  PH.forEach(p => { const s = document.createElement("span"); s.innerHTML = "<i></i>"; s.firstChild.style.background = PCOL[p]; s.appendChild(document.createTextNode(p + " " + PNAME[p])); $("#legend").appendChild(s); });
+})();
+
+// ---------- controls ----------
+function drawControls(){
+  const box = $("#phaseChips"); box.innerHTML = "";
+  const mk = (val, label, full) => {
+    const b = document.createElement("button"); b.type = "button"; b.className = "chip";
+    b.setAttribute("aria-pressed", state.phase === val);
+    if (val !== "all") { const d = document.createElement("span"); d.className = "dot"; d.style.background = PCOL[val]; b.appendChild(d); b.title = PNAME[val]; }
+    b.appendChild(document.createTextNode(label));
+    if (full) { const f = document.createElement("span"); f.className = "full"; f.textContent = full; b.appendChild(f); }
+    b.addEventListener("click", () => { state.phase = val; draw(); });
+    box.appendChild(b);
+  };
+  mk("all","All phases");
+  PH.forEach(p => mk(p, p, PNAME[p]));
+  const sel = $("#roleSel");
+  if (!sel.options.length) {
+    const roles = [...new Set(OWNERS.map(o => o.role))];
+    sel.add(new Option("All positions","all"));
+    roles.forEach(r => sel.add(new Option(r, r)));
+    sel.addEventListener("change", e => { state.role = e.target.value; draw(); });
+  }
+  sel.value = state.role;
+}
+$("#reset").addEventListener("click", () => { state.phase="all"; state.role="all"; state.q=""; $("#search").value=""; draw(); });
+$("#search").addEventListener("input", e => { state.q = e.target.value.toLowerCase(); drawTable(visible()); });
+document.querySelectorAll("th button").forEach(b => b.addEventListener("click", () => {
+  const k = b.dataset.k; if (state.sortK === k) state.sortDir *= -1; else { state.sortK = k; state.sortDir = 1; } drawTable(visible());
+}));
+
+function visible(){
+  const rs = state.role === "all" ? null : new Set(OWNERS.filter(o => o.role === state.role).map(o => o.step));
+  return STEPS.filter(s => (state.phase === "all" || s.phase === state.phase) && (!rs || rs.has(s.step)));
+}
+
+// ---------- tooltip ----------
+function tip(tipEl, panel, ev, lines){
+  tipEl.innerHTML = "";
+  lines.forEach(([c,t]) => { const d = document.createElement("div"); d.className = c; d.textContent = t; tipEl.appendChild(d); });
+  tipEl.style.display = "block";
+  const r = panel.getBoundingClientRect();
+  let x = ev.clientX - r.left + 14, y = ev.clientY - r.top + 14;
+  if (x + tipEl.offsetWidth > r.width - 8) x = Math.max(8, ev.clientX - r.left - tipEl.offsetWidth - 14);
+  tipEl.style.left = x + "px"; tipEl.style.top = y + "px";
+}
+const untip = t => t.style.display = "none";
+function fit(textEl, max){ let t = textEl.textContent; while (t.length > 3 && textEl.getComputedTextLength() > max){ t = t.slice(0,-2); textEl.textContent = t + "…"; } }
+
+// ---------- timeline ----------
+function drawGantt(rows){
+  const box = $("#gantt"); box.innerHTML = "";
+  if (!rows.length){ box.innerHTML = '<div class="empty">No steps match these filters. Clear filters to see the full plan.</div>'; return; }
+  const W = Math.max(320, box.clientWidth), narrow = W < 620;
+  const labW = narrow ? Math.round(W*.42) : Math.min(360, Math.round(W*.34));
+  const rowH = 30, top = 28, right = 60, H = top + rows.length*rowH + 4;
+  const svg = el("svg",{viewBox:`0 0 ${W} ${H}`,width:"100%",height:H,role:"img","aria-label":"Timeline of plan steps by day"}, box);
+  const x0 = labW + 12, x1 = W - right, X = d => x0 + (d-1)/89*(x1-x0);
+  (W < 480 ? [1,45,90] : narrow ? [1,30,60,90] : [1,15,30,45,60,75,90]).forEach(t => {
+    el("line",{x1:X(t),x2:X(t),y1:top-6,y2:H-2,stroke:t%30===0?"#B9C7BF":"#E6ECE8","stroke-dasharray":t%30===0?"":"3 3"},svg);
+    const tx = el("text",{x:X(t),y:15,"text-anchor":"middle","font-size":12,fill:"#5B6B64","font-weight":t%30===0?600:400},svg); tx.textContent = "Day " + t;
+  });
+  const panel = $("#tlPanel"), tp = $("#tip1");
+  rows.forEach((d,i) => {
+    const g = el("g",{class:"row",transform:`translate(0,${top+i*rowH})`,tabindex:0,role:"button","aria-label":`Step ${d.step}: ${d.purpose}`},svg);
+    const sel = d.step === state.sel;
+    el("rect",{class:"hl",x:0,y:1,width:W,height:rowH-2,rx:6,fill:sel?"#FFF6D6":"transparent"},g);
+    const t = el("text",{x:8,y:rowH/2+4,"font-size":13},g);
+    const a = el("tspan",{fill:PCOL[d.phase],"font-weight":700},t); a.textContent = d.step + "  ";
+    const b = el("tspan",{fill:"#17221D"},t); b.textContent = d.purpose;
+    { let tx = d.purpose; while (tx.length > 3 && t.getComputedTextLength() > labW - 12) { tx = tx.slice(0,-2); b.textContent = tx + "…"; } }
+    if (timed(d)){
+      const bx = X(d.start_day), bw = Math.max(X(d.end_day)-bx, 8);
+      el("rect",{class:firstDraw&&animate?"bar-anim":"",x:bx,y:8,width:bw,height:rowH-16,rx:5,fill:PCOL[d.phase],style:`animation-delay:${i*25}ms`},g);
+      const lb = el("text",{x:bx+bw+6,y:rowH/2+4,"font-size":12,fill:"#5B6B64"},g); lb.textContent = `D${d.start_day}–${d.end_day}`;
+    } else {
+      el("polygon",{points:`${X(1)},${rowH/2-6} ${X(1)+10},${rowH/2} ${X(1)},${rowH/2+6}`,fill:PCOL[d.phase]},g);
+      const lb = el("text",{x:X(1)+16,y:rowH/2+4,"font-size":12.5,fill:"#5B6B64","font-style":"italic"},g); lb.textContent = d.timing; fit(lb, W - X(1) - 20);
+    }
+    g.addEventListener("mousemove", ev => tip(tp, panel, ev, [["a",`Step ${d.step} · Phase ${d.phase}, ${d.phase_name}`],["b",d.purpose],["",`Who: ${d.positions}`],["",`When: ${d.timing}`]]));
+    g.addEventListener("mouseleave", () => untip(tp));
+    g.addEventListener("click", () => { state.sel = d.step; draw(); });
+    g.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); state.sel = d.step; draw(); } });
+  });
+}
+
+// ---------- owners ----------
+function drawOwners(){
+  const box = $("#owners"); box.innerHTML = "";
+  const roles = [];
+  OWNERS.forEach(o => { let r = roles.find(x => x.role === o.role); if (!r) roles.push(r = {role:o.role, items:[]}); r.items.push(o); });
+  roles.sort((a,b) => b.items.length - a.items.length);
+  const W = Math.max(300, box.clientWidth), rowH = 30, H = roles.length*rowH + 4;
+  const svg = el("svg",{viewBox:`0 0 ${W} ${H}`,width:"100%",height:H,role:"img","aria-label":"Steps led by each position"}, box);
+  const m = el("text",{"font-size":13},svg); let labW = 0;
+  roles.forEach(r => { m.textContent = r.role; labW = Math.max(labW, m.getComputedTextLength()); }); m.remove();
+  labW = Math.min(labW + 14, W*.52);
+  const max = Math.max(...roles.map(r => r.items.length));
+  const unit = Math.min(44, (W - labW - 30) / max);
+  const panel = $("#ownPanel"), tp = $("#tip2");
+  roles.forEach((r,i) => {
+    const on = state.role === "all" || state.role === r.role;
+    const g = el("g",{class:"row",transform:`translate(0,${i*rowH+2})`,opacity:on?1:.3,tabindex:0,role:"button","aria-label":`Filter by ${r.role}`},svg);
+    el("rect",{class:"hl",x:0,y:0,width:W,height:rowH-2,rx:6,fill:"transparent"},g);
+    const t = el("text",{x:4,y:rowH/2+3,"font-size":13,fill:"#17221D","font-weight":state.role===r.role?700:400},g); t.textContent = r.role; fit(t, labW - 10);
+    r.items.sort((a,b) => PH.indexOf(a.phase) - PH.indexOf(b.phase)).forEach((o,j) => {
+      const dim = state.phase !== "all" && state.phase !== o.phase;
+      const bx = labW + j*unit;
+      el("rect",{x:bx,y:5,width:unit-3,height:rowH-12,rx:4,fill:PCOL[o.phase],opacity:dim?.25:1},g);
+      if (unit >= 30){ const s = el("text",{x:bx+(unit-3)/2,y:rowH/2+3,"text-anchor":"middle","font-size":11,"font-weight":700,fill:"#fff",opacity:dim?.5:1},g); s.textContent = o.step; }
+    });
+    const c = el("text",{x:labW + r.items.length*unit + 6,y:rowH/2+3,"font-size":12,fill:"#5B6B64"},g); c.textContent = r.items.length;
+    const toggle = () => { state.role = state.role === r.role ? "all" : r.role; draw(); };
+    g.addEventListener("click", toggle);
+    g.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); toggle(); } });
+    g.addEventListener("mousemove", ev => tip(tp, panel, ev, [["b",r.role],["",`Leads ${r.items.length} step${r.items.length>1?"s":""}: ${r.items.map(o=>o.step).join(", ")}`],["a","Click to filter"]]));
+    g.addEventListener("mouseleave", () => untip(tp));
+  });
+}
+
+// ---------- focus ----------
+function drawFocus(rows){
+  const box = $("#focus"); box.innerHTML = "";
+  const h = document.createElement("h2"); h.textContent = "Step in focus"; box.appendChild(h);
+  const s = STEPS.find(x => x.step === state.sel);
+  if (!s){ const p = document.createElement("div"); p.className = "empty"; p.textContent = "No steps match these filters."; box.appendChild(p); return; }
+  const add = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt !== undefined) e.textContent = txt; box.appendChild(e); return e; };
+  add("p","note","Click any bar, position or row to change this view.");
+  add("div","id",s.step).style.color = PCOL[s.phase];
+  add("div","ph",`Phase ${s.phase}: ${s.phase_name}`);
+  add("div","pur",s.purpose);
+  const dl = add("dl");
+  const item = (k, v) => { const dt = document.createElement("dt"); dt.textContent = k; const dd = document.createElement("dd"); if (typeof v === "string") dd.textContent = v; else dd.appendChild(v); dl.append(dt, dd); };
+  item("Positions", s.positions);
+  item("Timing", s.timing);
+  item("Cadence", s.cadence);
+  const leads = OWNERS.filter(o => o.step === s.step);
+  if (leads.length){
+    const w = document.createElement("div"); w.className = "owners";
+    leads.forEach(o => { const b = document.createElement("button"); b.type="button"; b.className="chip"; b.textContent = o.role; b.setAttribute("aria-pressed", state.role === o.role); b.addEventListener("click", () => { state.role = o.role; draw(); }); w.appendChild(b); });
+    item("Filter by", w);
+  }
+  const idx = rows.findIndex(x => x.step === s.step);
+  const nav = add("div","nav");
+  const prev = document.createElement("button"); prev.type="button"; prev.textContent = "Previous step"; prev.disabled = idx <= 0;
+  const next = document.createElement("button"); next.type="button"; next.textContent = "Next step"; next.disabled = idx < 0 || idx >= rows.length-1;
+  prev.addEventListener("click", () => { state.sel = rows[idx-1].step; draw(); });
+  next.addEventListener("click", () => { state.sel = rows[idx+1].step; draw(); });
+  nav.append(prev, next);
+}
+
+// ---------- table ----------
+function drawTable(rows){
+  const tb = $("#tbody"); tb.innerHTML = "";
+  const q = state.q;
+  let r = q ? rows.filter(s => [s.step,s.phase_name,s.purpose,s.positions,s.timing].join(" ").toLowerCase().includes(q)) : rows.slice();
+  const k = state.sortK;
+  r.sort((a,b) => { const va = k==="seq"?a.seq:String(a[k]), vb = k==="seq"?b.seq:String(b[k]); return (va<vb?-1:va>vb?1:a.seq-b.seq)*state.sortDir; });
+  document.querySelectorAll("th").forEach(th => { const b = th.querySelector("button"); th.setAttribute("aria-sort", b.dataset.k === k ? (state.sortDir>0?"ascending":"descending") : "none"); });
+  if (!r.length){ const tr = tb.insertRow(); const c = tr.insertCell(); c.colSpan = 5; c.className = "empty"; c.textContent = "No steps match this search."; return; }
+  r.forEach(s => {
+    const tr = tb.insertRow(); if (s.step === state.sel) tr.className = "sel";
+    const c0 = tr.insertCell(); c0.className = "s"; c0.textContent = s.step; c0.style.color = PCOL[s.phase];
+    const c1 = tr.insertCell(); c1.className = "hn"; c1.textContent = s.phase + " " + s.phase_name;
+    tr.insertCell().textContent = s.purpose; tr.insertCell().textContent = s.positions; tr.insertCell().textContent = s.timing;
+    tr.addEventListener("click", () => { state.sel = s.step; draw(); });
+  });
+}
+
+// ---------- main ----------
+function draw(){
+  drawControls();
+  const rows = visible();
+  if (!rows.find(s => s.step === state.sel)) state.sel = rows.length ? rows[0].step : null;
+  const parts = [];
+  if (state.phase !== "all") parts.push(`Phase ${state.phase}, ${PNAME[state.phase]}`);
+  if (state.role !== "all") parts.push(state.role);
+  $("#status").textContent = parts.length ? `Showing ${rows.length} of ${STEPS.length} steps for ${parts.join(" and ")}` : `Showing all ${STEPS.length} steps`;
+  drawGantt(rows); drawOwners(); drawFocus(rows); drawTable(rows);
+  firstDraw = false;
+}
+draw();
+let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(draw, 120); });
+</script>
+</body>
+</html>
